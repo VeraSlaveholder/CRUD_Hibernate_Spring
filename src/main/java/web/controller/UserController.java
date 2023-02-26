@@ -6,17 +6,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import web.models.User;
-import web.service.UserServiceImpl;
+import web.service.UserService;
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
-
-    private final UserServiceImpl userService;
-
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserServiceImpl userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
@@ -53,11 +51,10 @@ public class UserController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("person") User user, BindingResult bindingResult,
-                         @PathVariable("id") int id) {
+    public String update(@ModelAttribute("person") User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "users/edit";
-        userService.update(id, user);
+        userService.update(user);
         return "redirect:/users";
     }
 
