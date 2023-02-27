@@ -1,5 +1,6 @@
 package web.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Objects;
 import java.util.Properties;
+
 @Configuration
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
@@ -24,7 +26,7 @@ import java.util.Properties;
 public class AppConfig {
 
     private final Environment env;
-
+@Autowired
     public AppConfig(Environment env) {
         this.env = env;
     }
@@ -62,7 +64,7 @@ public class AppConfig {
     }
 
     @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 
