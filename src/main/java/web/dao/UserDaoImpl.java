@@ -3,7 +3,7 @@ package web.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import web.models.User;
+import web.model.User;
 
 import javax.persistence.EntityManager;
 import java.util.List;
