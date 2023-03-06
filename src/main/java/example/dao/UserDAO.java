@@ -42,6 +42,6 @@ public class UserDAO {
 
     @Transactional
     public void delete(int id) {
-        entityManager.remove(entityManager.find(Users.class, id));
+        entityManager.remove(findById(id));
     }
 }
