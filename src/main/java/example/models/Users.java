@@ -20,7 +20,6 @@ public class Users {
     private String surname;
 
     public Users() {
-
     }
 
     public Users(String name, int age, String surname) {

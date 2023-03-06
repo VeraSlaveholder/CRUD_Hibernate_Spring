@@ -1,45 +1,43 @@
 package example.services;
 
+import example.dao.UserDAO;
 import example.models.Users;
-import example.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
 public class UsersService {
-    private final UsersRepository usersRepository;
+    private final UserDAO userDAO;
 
     @Autowired
-    public UsersService(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
+    public UsersService(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
     public List<Users> findAll() {
-        return usersRepository.findAll();
+        return userDAO.findAll();
     }
 
     public Users findOne(int id) {
-        Optional<Users> foundPerson = usersRepository.findById(id);
-        return foundPerson.orElse(null);
+        return userDAO.findById(id);
     }
 
     @Transactional
     public void save(Users users) {
-        usersRepository.save(users);
+        userDAO.save(users);
     }
 
     @Transactional
-    public void update(int id, Users updatedUsers) {
-        updatedUsers.setId(id);
-        usersRepository.save(updatedUsers);
+    public void update(Users updatedUsers) {
+        userDAO.update(updatedUsers);
     }
+
     @Transactional
-    public void delete(int id){
-        usersRepository.deleteById(id);
+    public void delete(int id) {
+        userDAO.delete(id);
     }
 }
