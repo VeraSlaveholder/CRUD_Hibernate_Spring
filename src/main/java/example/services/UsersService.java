@@ -13,9 +13,11 @@ import java.util.List;
 public class UsersService {
     private final UserDAO userDAO;
 
+
     @Autowired
     public UsersService(UserDAO userDAO) {
         this.userDAO = userDAO;
+
     }
 
     public List<Users> findAll() {
@@ -34,6 +36,7 @@ public class UsersService {
     @Transactional
     public void update(Users updatedUsers) {
         userDAO.update(updatedUsers);
+
     }
 
     @Transactional

@@ -3,25 +3,21 @@ package example.dao;
 import example.models.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Component
+@Repository
 public class UserDAO {
     @PersistenceContext
-    private final EntityManager entityManager;
-
-    @Autowired
-    public UserDAO(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
+    private EntityManager entityManager;
 
     @Transactional(readOnly = true)
     public List<Users> findAll() {
-        return entityManager.createQuery("select u from Users u", Users.class).getResultList();
+        return entityManager.createQuery("SELECT users FROM Users users", Users.class).getResultList();
     }
 
     @Transactional(readOnly = true)
@@ -42,6 +38,9 @@ public class UserDAO {
 
     @Transactional
     public void delete(int id) {
-        entityManager.remove(findById(id));
+        Users user = entityManager.find(Users.class, id);
+        if (user != null) {
+            entityManager.remove(user);
+        }
     }
 }

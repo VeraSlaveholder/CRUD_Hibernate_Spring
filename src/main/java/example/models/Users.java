@@ -3,7 +3,7 @@ package example.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Person")
+@Table(name = "Users")
 public class Users {
     @Id
     @Column(name = "id")
@@ -63,7 +63,7 @@ public class Users {
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +

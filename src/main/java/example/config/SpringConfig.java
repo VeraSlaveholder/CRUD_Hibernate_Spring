@@ -1,6 +1,7 @@
 package example.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -89,6 +90,7 @@ public class SpringConfig implements WebMvcConfigurer {
     }
 
     @Bean
+    @Qualifier(value = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
@@ -102,6 +104,7 @@ public class SpringConfig implements WebMvcConfigurer {
     }
 
     @Bean
+    @Qualifier(value = "transactionManager")
     public PlatformTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
