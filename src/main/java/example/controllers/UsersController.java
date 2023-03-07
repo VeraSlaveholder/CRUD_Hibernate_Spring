@@ -40,7 +40,7 @@ public class UsersController {
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("user")Users users, BindingResult bindingResult) {
+    public String create(@ModelAttribute("user") Users users, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "users/new";
         usersService.save(users);
